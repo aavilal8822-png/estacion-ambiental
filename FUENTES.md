@@ -50,7 +50,7 @@ Principales usos:
 - Ayuda para comprender el funcionamiento de los sensores.
 - Apoyo para realizar las conexiones entre sensores y ESP32-S3.
 - Revisión de niveles de voltaje y divisores resistivos.
-- corrección de códigos de prueba.
+- Corrección de códigos de prueba.
 - Apoyo conceptual para el diseño del encapsulado 3D.
 
 El código y las recomendaciones generadas mediante inteligencia artificial fueron revisadas, modificadas y adaptadas al hardware real utilizado por el equipo.
