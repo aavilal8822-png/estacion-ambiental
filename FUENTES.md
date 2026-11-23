@@ -38,11 +38,6 @@ Se utilizó la documentación técnica del sensor DSM501A como referencia para i
 
 El código fue adaptado al ESP32-S3 y al montaje realizado por el equipo.
 
-### ThingSpeak
-
-Se utilizó la documentación de ThingSpeak como referencia para implementar el envío de datos mediante Wi-Fi.
-
-Los datos del proyecto se organizan en campos independientes para temperatura, humedad, MQ-9 y material particulado.
 
 ## 3. Uso de Inteligencia Artificial
 
@@ -76,7 +71,6 @@ El equipo realizó las siguientes adaptaciones:
 
 - Espressif Systems - Documentación oficial ESP32.
 - Adafruit - DHT Sensor Library.
-- MathWorks - ThingSpeak.
 - Datasheet del sensor MQ-9.
 - Datasheet del sensor DSM501A.
 
