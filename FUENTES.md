@@ -49,16 +49,13 @@ Adaptación al proyecto: Estas dependencias forman parte del servidor desarrolla
 
 Las versiones declaradas corresponden al archivo package.json. Las versiones instaladas deben verificarse en package-lock.json.
 
-## 3. Material externo, ejemplos y documentación técnica
+Design Engineering Center (DEC) — Universidad Adolfo Ibáñez
 
-| Recurso | Fuente | Uso en el proyecto | Adaptación / aplicación |
-|---|---|---|---|
-| Documentación de ESP32-S3 y Arduino-ESP32 | https://docs.espressif.com/projects/arduino-esp32/en/latest/ | Referencia para periféricos, GPIO y conectividad | Adaptación de pines y adquisición a la placa ESP32-S3 N16R8 y a tres sensores conectados directamente |
-| Guía de clase de despliegue con Railway y base de datos | Material entregado en TEI201 | Referencia de arquitectura IoT y almacenamiento | Se utiliza como orientación para separar captura con ESP32, servicio web y consulta de históricos; comprobar qué fragmentos se reutilizaron literalmente |
-| Documentación de Railway | https://docs.railway.com/ | Configuración y despliegue de aplicación web | Aplicación al dashboard de la estación ambiental |
-| Documentación de GitHub | https://docs.github.com/es | Organización del repositorio y Markdown | Estructura de carpetas, README y evidencias de entrega |
-| Datasheets y documentación de cada sensor | Indicar URL específica del documento efectivamente consultado | Alimentación, pinout y limitaciones de DHT11, MQ-9 y DSM501A | Selección de niveles de tensión, división resistiva e interpretación de mediciones |
-
+* Fuente institucional: https://dec.uai.cl
+* Uso en el proyecto: El equipo acudió al DEC de la Universidad Adolfo Ibáñez para solicitar y obtener los componentes electrónicos necesarios para construir la estación ambiental.
+* Consulta técnica: La información sobre las características, funcionamiento, alimentación, conexiones y aplicaciones de los sensores DHT11, MQ-9 y DSM501A fue consultada mediante ChatGPT (OpenAI).
+* Aplicación: Con esta información, el equipo seleccionó e integró los sensores a la ESP32-S3, considerando sus funciones dentro del sistema y los requerimientos de alimentación y conexión.
+* Verificación: Las recomendaciones obtenidas mediante IA se contrastaron con las pruebas y el montaje físico realizados por el equipo, en la medida documentada en el protocolo de pruebas.
 ### Código externo incorporado
 
 No es posible determinar únicamente desde los documentos de entrega qué bloques de `server.js` o del firmware fueron copiados o adaptados de ejemplos externos. **El equipo debe revisar el código y agregar aquí cada fragmento externo realmente empleado**, siguiendo este formato:
@@ -70,6 +67,90 @@ No es posible determinar únicamente desde los documentos de entrega qué bloque
 - **Cómo se probó:** `[evidencia o prueba realizada]`
 
 Si un bloque se desarrolló íntegramente por el equipo sin copiar un ejemplo externo, indicarlo expresamente tras verificarlo; no inventar referencias.
+
+## 3. Material externo, ejemplos y documentación técnica
+
+Durante el desarrollo de la estación ambiental IoT se utilizaron recursos institucionales, documentación técnica, material académico y herramientas de inteligencia artificial para apoyar la selección de componentes, el diseño electrónico y la programación del sistema.
+
+3.1. Design Engineering Center (DEC) — Universidad Adolfo Ibáñez
+
+* Fuente institucional: https://dec.uai.cl
+* Uso en el proyecto: El equipo acudió al DEC de la Universidad Adolfo Ibáñez para solicitar y obtener los componentes electrónicos necesarios para construir la estación ambiental.
+* Consulta técnica: La información sobre las características, funcionamiento, alimentación, conexiones y aplicaciones de los sensores DHT11, MQ-9 y DSM501A fue consultada mediante ChatGPT (OpenAI).
+* Aplicación: A partir de estas consultas, el equipo seleccionó e integró los sensores a la ESP32-S3, considerando sus funciones, requerimientos eléctricos y compatibilidad con el sistema.
+* Verificación: Las recomendaciones se contrastaron con el montaje físico y las pruebas realizadas, según lo documentado en el protocolo de pruebas.
+
+3.2. Documentación de ESP32-S3 y Arduino-ESP32
+
+* Fuente: https://docs.espressif.com/projects/arduino-esp32/en/latest/
+* Uso en el proyecto: Referencia técnica para la programación de la ESP32-S3, sus entradas y salidas, la lectura analógica y la conectividad Wi-Fi.
+* Aplicación: Configuración del DHT11 en GPIO4, MQ-9 en GPIO5 y DSM501A en GPIO7, junto con la lectura de sensores y transmisión de información.
+* Adaptación: El firmware fue organizado para utilizar directamente los tres sensores en una sola ESP32-S3, eliminando la arquitectura anterior que también utilizaba Arduino UNO.
+
+3.3. Guía académica de TEI201 — Taller de Diseño en Ingeniería
+
+* Fuente: Material de clases proporcionado por el equipo docente de la Universidad Adolfo Ibáñez.
+* Uso en el proyecto: Orientación para el desarrollo del sistema IoT, incluyendo adquisición de datos, comunicación con servicios web, almacenamiento y visualización.
+* Aplicación: Se tomó como referencia la arquitectura que conecta la ESP32-S3 con un servidor web y una base de datos.
+* Adaptación: La arquitectura se aplicó a los sensores seleccionados y al sistema de monitoreo ambiental desarrollado por el equipo.
+
+3.4. Documentación de Railway
+
+* Fuente: https://docs.railway.com/
+* Uso en el proyecto: Referencia para el despliegue y configuración de aplicaciones web.
+* Aplicación: Utilización de Railway para alojar el servidor y dashboard de la estación ambiental.
+* Resultado: La plataforma web permite consultar las mediciones ambientales registradas por el sistema.
+* Dashboard: https://estacion-ambiental-production.up.railway.app
+
+3.5. Documentación de GitHub
+
+* Fuente: https://docs.github.com/es
+* Uso en el proyecto: Organización, almacenamiento y documentación de los archivos del proyecto.
+* Aplicación: Creación del repositorio con firmware, documentación de hardware, esquemáticos, modelos 3D, pruebas y declaración de fuentes.
+* Repositorio: https://github.com/aavilal8822-png/estacion-ambiental
+
+3.6. Código externo y adaptaciones realizadas
+
+Para desarrollar el software se contó con el material académico del curso, documentación de bibliotecas y asistencia de ChatGPT.
+
+Las principales implementaciones documentadas en el proyecto son:
+
+Firmware — firmware/main.ino
+
+* Lectura de temperatura y humedad mediante DHT11.
+* Lectura analógica del MQ-9 y aplicación del factor de corrección del divisor de voltaje.
+* Medición del porcentaje de ocupación LOW del DSM501A mediante interrupciones.
+* Conexión Wi-Fi y mecanismo de reconexión.
+* Construcción de mensajes JSON y envío HTTPS al servidor de Railway.
+
+Servidor — server.js
+
+* Implementación del servidor mediante Node.js y Express.
+* Comunicación con PostgreSQL mediante la biblioteca pg.
+* Recepción de las mediciones enviadas por la ESP32-S3.
+* Disponibilidad de los datos para su consulta desde el dashboard.
+
+Adaptaciones al proyecto
+
+Las implementaciones se ajustaron a las características de la estación ambiental, sus tres sensores, los pines seleccionados y la estructura de los datos enviados al servidor.
+
+La asistencia de ChatGPT utilizada en el desarrollo y documentación se declara en la sección 4 de este archivo.
+
+Trazabilidad del código: La guía del curso y las bibliotecas utilizadas se identifican como recursos de apoyo. Para cualquier fragmento copiado o adaptado literalmente desde una fuente externa, corresponde registrar su procedencia exacta y los cambios realizados. La descripción anterior no implica que todas las funciones hayan sido escritas originalmente por el equipo ni que todas provengan de una misma fuente.
+
+3.7. Información técnica de los sensores
+
+Las características generales de los sensores fueron investigadas con apoyo de ChatGPT (OpenAI).
+
+* DHT11: funcionamiento, alimentación y lectura de temperatura y humedad.
+* MQ-9: alimentación, salida analógica, protección mediante divisor de voltaje y limitaciones para expresar concentraciones en ppm.
+* DSM501A: alimentación, señal de salida, pulsos LOW y cálculo de ocupación durante una ventana de medición.
+
+La información obtenida mediante inteligencia artificial se utilizó como apoyo para integrar los componentes y comprender sus limitaciones.
+
+Las pruebas realizadas con el prototipo se documentan en protocolo_pruebas.md.
+
+La información proporcionada por ChatGPT no reemplaza la consulta de fichas técnicas oficiales ni la calibración experimental necesaria para validar la precisión de las mediciones.
 
 ## 4. Uso de inteligencia artificial
 
