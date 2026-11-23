@@ -59,36 +59,51 @@ Criterio de éxito:
 Criterio de éxito:
 - Los datos aparecen correctamente en ThingSpeak y quedan registrados con fecha y hora.
 
-## Prueba 5: transmisión y almacenamiento en ThingSpeak
+## Prueba 5: Transmisión y almacenamiento de datos en Railway
 
-Objetivo: verificar que las mediciones enviadas por la ESP32-S3 se almacenen correctamente en ThingSpeak.
+Objetivo: Verificar que las mediciones obtenidas por la ESP32-S3 se transmitan correctamente mediante Wi-Fi y queden almacenadas para su posterior visualización.
 
 Procedimiento:
-- Conectar la ESP32-S3 a una red Wi-Fi con acceso a internet.
-- Ejecutar el programa principal.
-- Verificar que se envíen mediciones a ThingSpeak.
-- Revisar que los registros incluyan fecha y hora.
-- Comprobar que los datos anteriores continúen disponibles después de actualizar el dashboard.
-- Comparar la cantidad de envíos realizados con los registros recibidos.
+
+* Encender la estación ambiental y conectar la ESP32-S3 a internet.
+* Ejecutar el programa principal de lectura de sensores.
+* Acceder al dashboard de la estación ambiental.
+* Verificar que las mediciones aparezcan correctamente en la plataforma.
+* Comprobar que los registros incluyan fecha y hora.
+* Revisar el historial de aproximadamente 500 registros disponibles.
+* Actualizar la página y verificar que las mediciones anteriores permanezcan disponibles.
 
 Criterio de éxito:
-- Los datos aparecen correctamente en ThingSpeak y quedan almacenados con fecha y hora.
-- El historial permanece accesible después de actualizar la página.
-- Se registra la cantidad de envíos exitosos y fallidos.
 
-Evidencia:
-- Captura del dashboard.
-- Exportación de datos en CSV.
-- Registro de cantidad de envíos y errores.
-  
+* Los datos de los sensores se transmiten correctamente al sistema.
+* Las mediciones quedan almacenadas con fecha y hora.
+* El historial permanece disponible después de actualizar la página.
+* El dashboard permite consultar las mediciones registradas.
+
+Evidencias:
+
+* Capturas del dashboard de Railway.
+* Historial de aproximadamente 500 registros.
+* Gráficos de las variables ambientales.
+* Enlace a la plataforma: https://estacion-ambiental-production.up.railway.app
+
+Resultado: Se dispone de un conjunto de aproximadamente 500 registros en el dashboard. Esta evidencia permite documentar la adquisición y visualización de mediciones ambientales. La estabilidad de la transmisión y la integridad del historial deben verificarse mediante las pruebas descritas.
+
 ## Evidencias
 
-Se guardarán:
+Las evidencias del funcionamiento de la estación ambiental incluyen:
 
-- Capturas del monitor serie.
-- Capturas del dashboard.
-- Datos exportados desde ThingSpeak.
-- Fotografías del prototipo funcionando.
+* Dashboard web: plataforma desplegada en Railway para visualizar las mediciones ambientales.
+* Historial de datos: aproximadamente 500 registros disponibles para consultar las mediciones obtenidas durante las pruebas.
+* Gráficos de mediciones: visualización de las variables ambientales registradas por los sensores.
+* Fotografías del prototipo: imágenes del montaje físico y de los componentes utilizados.
+* Protocolo de pruebas: documentación de los procedimientos realizados, criterios de éxito y fallas identificadas.
+
+Enlace al dashboard:
+https://estacion-ambiental-production.up.railway.app
+
+Estas evidencias permiten documentar el funcionamiento del sistema, revisar las mediciones obtenidas y evaluar su capacidad de registrar información ambiental.
+
 
 ## Fallas encontradas
 
