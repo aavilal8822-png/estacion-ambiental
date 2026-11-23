@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estación ambiental</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 16px;
+      background: #f4f7fa;
+      color: #182b3a;
+    }
+    select { padding: 10px; }
+    .panel {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 20px;
+    }
+    .grafica { height: 320px; }
+    .tabla { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+  <h1>Estación ambiental</h1>
+  <p>Temperatura, humedad, respuesta a gases y partículas.</p>
+  <p id="estado" role="status">Esperando conexión con el servidor…</p>
+
+  <label for="sensor">Ver gráfica de:</label>
+  <select id="sensor">
+    <option value="temperatura">Temperatura (°C)</option>
+    <option value="humedad">Humedad (%)</option>
+    <option value="mq9_voltaje">MQ-9: voltaje AO estimado (V)</option>
+    <option value="dsm_low">DSM501A: ocupación LOW (%)</option>
+  </select>
+
+  <section class="panel">
+    <h2 id="titulo">Lecturas recientes</h2>
+    <div class="grafica"><canvas id="grafico"></canvas></div>
+  </section>
+
+  <section class="panel tabla">
+    <h2>Últimas lecturas recibidas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Fecha</th><th>Dispositivo</th>
+          <th>Variable</th><th>Valor</th>
+        </tr>
+      </thead>
+      <tbody id="tabla"></tbody>
+    </table>
+  </section>
+
+  <p>
+    MQ-9: respuesta en voltaje, sin conversión a ppm.
+    DSM501A: ocupación LOW, sin conversión a PM2.5.
+  </p>
+
+  <script>
+    const selector = document.getElementById("sensor");
+    const estado = document.getElementById("estado");
+    const tabla = document.getElementById("tabla");
+
+    const unidades = {
+      temperatura: "°C",
+      humedad: "%",
+      mq9_voltaje: "V",
+      dsm_low: "%"
+    };
+
+    let lecturas = [];
+
+    const grafico = new Chart(document.getElementById("grafico"), {
+      type: "line",
+      data: {
+        labels: [],
+        datasets: [{
+          label: "",
+          data: [],
+          borderColor: "#007f86",
+          tension: 0.2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: false
+      }
+    });
+
+    function actualizarGrafica() {
+      const nombre = selector.value;
+      const titulo = selector.options[selector.selectedIndex].text;
+      const datos = lecturas
+        .filter(d => d.sensor === nombre)
+        .slice(0, 60)
+        .reverse();
+
+      document.getElementById("titulo").textContent =
+        datos.length ? titulo : titulo + ": sin datos";
+
+      grafico.data.labels = datos.map(d =>
+        new Date(d.creado_en).toLocaleTimeString()
+      );
+      grafico.data.datasets[0].label = titulo;
+      grafico.data.datasets[0].data = datos.map(d => d.valor);
+      grafico.update();
+    }
+
+    function actualizarTabla() {
+      tabla.replaceChildren();
+
+      for (const lectura of lecturas.slice(0, 30)) {
+        const fila = document.createElement("tr");
+        const valores = [
+          new Date(lectura.creado_en).toLocaleString(),
+          lectura.dispositivo,
+          lectura.sensor,
+          `${Number(lectura.valor).toFixed(3)} ${unidades[lectura.sensor] || ""}`
+        ];
+
+        for (const valor of valores) {
+          const celda = document.createElement("td");
+          celda.textContent = valor;
+          fila.appendChild(celda);
+        }
+
+        tabla.appendChild(fila);
+      }
+    }
+
+    async function actualizar() {
+      try {
+        const respuesta = await fetch("/api/lecturas?limite=500", {
+          cache: "no-store"
+        });
+
+        if (!respuesta.ok) {
+          throw new Error(`HTTP ${respuesta.status}`);
+        }
+
+        const datos = await respuesta.json();
+        if (!Array.isArray(datos)) {
+          throw new Error("Respuesta inesperada");
+        }
+
+        lecturas = datos;
+        actualizarGrafica();
+        actualizarTabla();
+
+        estado.textContent =
+          `Consulta correcta: ${new Date().toLocaleTimeString()}. ` +
+          `${lecturas.length} lecturas recuperadas.`;
+      } catch (error) {
+        estado.textContent =
+          `No se pudieron actualizar los datos: ${error.message}. ` +
+          "Se conservan las últimas lecturas visibles.";
+      } finally {
+        setTimeout(actualizar, 5000);
+      }
+    }
+
+    selector.addEventListener("change", actualizarGrafica);
+    actualizar();
+  </script>
+</body>
+</html>

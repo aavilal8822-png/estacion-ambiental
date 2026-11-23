@@ -1,0 +1,17 @@
+{
+  "name": "estacion-ambiental",
+  "version": "1.0.0",
+  "description": "Estacion ambiental ESP32-S3 con Railway y PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
+  }
+}
