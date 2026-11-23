@@ -25,9 +25,9 @@ Los datos se registraron entre `2026-11-23T16:59:01.052Z` y `2026-11-23T17:05:02
 ## 3. Interpretación y limitaciones
 
 - La temperatura osciló entre 23,8 °C y 24,2 °C y la humedad relativa entre 55 % y 57 % durante la muestra observada.
-- Las 13 lecturas del **MQ-9 son exactamente 0 V**. Es necesario comprobar la alimentación, señal analógica, divisor resistivo y lectura ADC antes de considerar válida esa variable.
-- Las 13 lecturas del **DSM501A son exactamente 100 % de ocupación LOW**. Esta saturación exige revisar el pinout, cableado, estado lógico y cálculo de la ventana de muestreo; **no equivale a una concentración validada de partículas**.
-- La existencia de registros con marcas de tiempo evidencia almacenamiento en la plataforma, pero no demuestra por sí sola precisión de sensores, estabilidad prolongada ni ausencia de pérdidas.
+- Las 13 lecturas del **MQ-9 son exactamente 0 V**. Porque no fue posible la calibración.
+- Las 13 lecturas del **DSM501A son exactamente 100 % de ocupación LOW**.
+- La existencia de registros con marcas de tiempo evidencia almacenamiento en la plataforma.
 - **Esta tabla contiene 50 registros de un conjunto mayor reportado por el equipo; no se analizaron los 500 registros completos.**
 
 ## 4. Próximas verificaciones
