@@ -39,13 +39,6 @@ Los sensores recopilan información ambiental y el ESP32 procesa las mediciones.
 
 Posteriormente, los datos son enviados mediante Wi-Fi a ThingSpeak, donde pueden almacenarse y visualizarse mediante gráficos.
 
-## Dashboard
-
-El dashboard del proyecto será implementado utilizando ThingSpeak.
-
-Link al dashboard:
-
-Pendiente de agregar.
 
 ## Estructura del repositorio
 
