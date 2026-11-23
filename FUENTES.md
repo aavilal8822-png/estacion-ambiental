@@ -12,26 +12,42 @@ Este documento declara las fuentes externas, bibliotecas, herramientas y asisten
 
 ## 2. Librerías y dependencias
 
-### 2.1. Firmware de ESP32-S3
+## 2.1. Firmware de ESP32-S3
 
-| Recurso | Versión | Uso previsto / documentado | Fuente | Confirmación pendiente |
-|---|---|---|---|---|
-| Arduino core para ESP32 (Espressif) | Revisar instalación de Arduino IDE | Programación de la placa y acceso a GPIO, ADC y Wi-Fi | https://github.com/espressif/arduino-esp32 | Confirmar versión instalada |
-| Biblioteca Wi-Fi (`WiFi.h`, si se importa) | Incluida en el core | Conectividad de la ESP32-S3 | https://github.com/espressif/arduino-esp32 | Confirmar importación |
-| Cliente HTTP (`HTTPClient.h`, si se importa) | Incluida en el core | Envío de mediciones al servidor | https://github.com/espressif/arduino-esp32 | Confirmar importación |
-| Biblioteca DHT (si se utiliza `DHT.h` de Adafruit) | Verificar en Arduino IDE | Lectura de temperatura y humedad del DHT11 | https://github.com/adafruit/DHT-sensor-library | Confirmar nombre y versión |
-| Adafruit Unified Sensor (si la biblioteca DHT lo requiere) | Verificar en Arduino IDE | Dependencia de lectura DHT | https://github.com/adafruit/Adafruit_Sensor | Confirmar uso |
+Librería	Versión	Uso en el proyecto	Fuente
+Arduino core para ESP32	Por verificar	Programación de la ESP32-S3, lectura ADC, GPIO e interrupciones	Espressif
+WiFi.h	Incluida en el core ESP32	Conexión a internet y reconexión automática	Espressif
+WiFiClientSecure.h	Incluida en el core ESP32	Establecimiento de conexiones HTTPS con el servidor	Espressif
+HTTPClient.h	Incluida en el core ESP32	Envío de mediciones al servidor de Railway mediante solicitudes POST	Espressif
+ArduinoJson.h	Por verificar	Creación y serialización de datos JSON para enviarlos al servidor	ArduinoJson
+DHT.h	Por verificar	Lectura de temperatura y humedad del DHT11	Adafruit DHT Sensor Library
 
-### 2.2. Servidor y dashboard
+Adaptaciones e implementación en el proyecto:
 
-| Dependencia / entorno | Versión | Uso | Fuente / cómo verificar |
-|---|---|---|---|
-| Node.js | Versión de ejecución por comprobar | Ejecutar `server.js` | https://nodejs.org/ |
-| Paquetes npm | Versiones exactas registradas en `package-lock.json` | Servidor, API, acceso a datos y/o visualización según código | Revisar `package.json` y https://www.npmjs.com/ |
-| Railway | Servicio de despliegue utilizado | Publicación del backend y dashboard web | https://docs.railway.com/ |
-| Proveedor de base de datos | Por confirmar en configuración de despliegue | Persistencia del historial | Revisar `server.js` y variables de entorno (sin publicar credenciales) |
+El firmware firmware/main.ino fue configurado específicamente para utilizar los tres sensores conectados directamente a la ESP32-S3.
 
-**Antes de entregar:** reemplazar «por comprobar» por las versiones y nombres exactos. Si se utilizan `express`, `pg`, `cors`, `dotenv` u otras bibliotecas, declarar **solo las que aparezcan realmente** en las dependencias y explicar su función.
+* DHT11: conectado al GPIO4 para registrar temperatura y humedad.
+* MQ-9: conectado al GPIO5 mediante un divisor de voltaje. Se promedian 16 lecturas analógicas y se estima el voltaje de salida, sin convertirlo directamente a ppm.
+* DSM501A: conectado al GPIO7. Se utilizan interrupciones para contabilizar los pulsos y calcular el porcentaje de ocupación LOW en ventanas de 30 segundos.
+* Wi-Fi: se implementó conexión a internet y reintentos de reconexión cada 20 segundos cuando se pierde la señal.
+* Comunicación con Railway: las mediciones se organizan en JSON y se envían mediante solicitudes HTTPS POST a la API del proyecto.
+* Validación básica: se evita enviar valores numéricos no finitos y se comprueba la respuesta HTTP del servidor.
+
+Limitación de seguridad identificada: el código utiliza setInsecure() para las conexiones HTTPS de prueba, por lo que no verifica el certificado del servidor. Para una versión destinada a operar permanentemente se debe implementar la validación del certificado TLS.
+
+Nota de versiones: las versiones exactas del core ESP32, ArduinoJson y la biblioteca DHT deben comprobarse en el entorno Arduino IDE utilizado para compilar el proyecto.
+
+## 2.2. Backend Node.js
+
+Librería	Versión declarada	Uso en el proyecto	Fuente oficial
+dotenv	^16.4.5	Carga de variables de entorno para configurar el servidor y las credenciales de conexión.	dotenv
+express	^4.21.0	Implementación del servidor HTTP, los endpoints de la API y el acceso al dashboard.	Express
+pg	^8.13.0	Comunicación entre el servidor Node.js y la base de datos PostgreSQL.	node-postgres
+Node.js	>=18	Entorno de ejecución del servidor alojado en Railway.	Node.js
+
+Adaptación al proyecto: Estas dependencias forman parte del servidor desarrollado para la estación ambiental. Su función es permitir la configuración del backend, la comunicación mediante HTTP y el acceso a PostgreSQL para gestionar las mediciones ambientales.
+
+Las versiones declaradas corresponden al archivo package.json. Las versiones instaladas deben verificarse en package-lock.json.
 
 ## 3. Material externo, ejemplos y documentación técnica
 
