@@ -60,8 +60,7 @@ Para validar diferencias reales entre comunas será necesario realizar campañas
 
 - [Dashboard web de la estación ambiental](https://estacion-ambiental-production.up.railway.app)
 - Captura del dashboard con las mediciones\.
-- Registro histórico de datos\.
-- Archivo CSV de mediciones, si se encuentra disponible\.
+- Captura de registro histórico de datos\.
 
 ## 8\. Conclusión
 
