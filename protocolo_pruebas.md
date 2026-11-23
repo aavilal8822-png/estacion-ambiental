@@ -55,18 +55,32 @@ Procedimiento:
 Criterio de éxito:
 - Los tres sensores entregan datos sin que el sistema se reinicie o deje de responder.
 
-## Prueba 5: almacenamiento de datos
-
-Objetivo: verificar que las mediciones queden almacenadas en ThingSpeak.
-
-Procedimiento:
-- Conectar el ESP32-S3 a Wi-Fi.
-- Enviar las mediciones al canal de ThingSpeak.
-- Revisar los gráficos y el historial.
 
 Criterio de éxito:
 - Los datos aparecen correctamente en ThingSpeak y quedan registrados con fecha y hora.
 
+## Prueba 5: transmisión y almacenamiento en ThingSpeak
+
+Objetivo: verificar que las mediciones enviadas por la ESP32-S3 se almacenen correctamente en ThingSpeak.
+
+Procedimiento:
+- Conectar la ESP32-S3 a una red Wi-Fi con acceso a internet.
+- Ejecutar el programa principal.
+- Verificar que se envíen mediciones a ThingSpeak.
+- Revisar que los registros incluyan fecha y hora.
+- Comprobar que los datos anteriores continúen disponibles después de actualizar el dashboard.
+- Comparar la cantidad de envíos realizados con los registros recibidos.
+
+Criterio de éxito:
+- Los datos aparecen correctamente en ThingSpeak y quedan almacenados con fecha y hora.
+- El historial permanece accesible después de actualizar la página.
+- Se registra la cantidad de envíos exitosos y fallidos.
+
+Evidencia:
+- Captura del dashboard.
+- Exportación de datos en CSV.
+- Registro de cantidad de envíos y errores.
+  
 ## Evidencias
 
 Se guardarán:
