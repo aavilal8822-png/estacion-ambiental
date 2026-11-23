@@ -14,15 +14,15 @@ Este documento declara las fuentes externas, bibliotecas, herramientas y asisten
 
 ## 2.1. Firmware de ESP32-S3
 
-| Librería | Versión | Uso en el proyecto | Fuente |
+| Librería | Versión de referencia | Uso en el proyecto | Fuente |
 |---|---|---|---|
-| Arduino core para ESP32 | Por verificar | Programación de la ESP32-S3, lectura ADC, GPIO e interrupciones | [Espressif](https://github.com/espressif/arduino-esp32) |
+| Arduino core para ESP32 | 4.0.0 | Programación de la ESP32-S3, lectura ADC, GPIO e interrupciones | [Espressif](https://github.com/espressif/arduino-esp32) |
 | WiFi.h | Incluida en el core ESP32 | Conexión a internet y reconexión automática | [Espressif](https://github.com/espressif/arduino-esp32) |
-| WiFiClientSecure.h | Incluida en el core ESP32 | Establecimiento de conexiones HTTPS con el servidor | [Espressif](https://github.com/espressif/arduino-esp32) |
-| HTTPClient.h | Incluida en el core ESP32 | Envío de mediciones al servidor de Railway mediante solicitudes POST | [Espressif](https://github.com/espressif/arduino-esp32) |
-| ArduinoJson.h | Por verificar | Creación y serialización de datos JSON para enviarlos al servidor | [ArduinoJson](https://arduinojson.org/) |
-| DHT.h | Por verificar | Lectura de temperatura y humedad del DHT11 | [Adafruit DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library) |
-Adaptaciones e implementación en el proyecto:
+| WiFiClientSecure.h | Incluida en el core ESP32 | Conexiones HTTPS con Railway | [Espressif](https://github.com/espressif/arduino-esp32) |
+| HTTPClient.h | Incluida en el core ESP32 | Envío de mediciones mediante solicitudes POST | [Espressif](https://github.com/espressif/arduino-esp32) |
+| ArduinoJson.h | 7.4.3 | Creación y serialización de datos JSON | [ArduinoJson](https://github.com/bblanchon/ArduinoJson) |
+| DHT.h | 1.4.7 | Lectura de temperatura y humedad del DHT11 | [Adafruit](https://github.com/adafruit/DHT-sensor-library) |
+
 
 El firmware firmware/main.ino fue configurado específicamente para utilizar los tres sensores conectados directamente a la ESP32-S3.
 
