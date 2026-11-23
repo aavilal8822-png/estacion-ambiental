@@ -1,0 +1,11 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "script",
+  "id": "66030b5f-a024-4ef4-8607-13dc45e44a5b",
+  "author": "Equipo Estación Ambiental IoT",
+  "description": {
+    "": "Importa STL de caja y tapa y crea un gemelo 3D con bateria, ESP32 y sensores. Exporta a F3D."
+  },
+  "version": "2.0",
+  "supportedOS": "windows|mac"
+}
