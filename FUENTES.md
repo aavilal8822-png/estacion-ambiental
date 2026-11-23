@@ -2,7 +2,7 @@
 
 **Taller de Diseño en Ingeniería | Universidad Adolfo Ibáñez | Avance 3 (23 de noviembre de 2026)**
 
-**Integrantes:** Antonia, Agustín y Claudio.
+**Integrantes:** Antonia Ávila, Agustín Jiménez y Claudio Parada.
 
 **Repositorio:** https://github.com/aavilal8822-png/estacion-ambiental  
 **Dashboard:** https://estacion-ambiental-production.up.railway.app
@@ -110,7 +110,7 @@ Los aproximadamente 500 registros reportados **no demuestran por sí solos preci
 | Esquemático, conexiones y materiales | [`hardware/`](hardware/) |
 | Caja, tapa, renders y planos | [`diseno-3d/`](diseno-3d/) |
 | Protocolo de pruebas | [`protocolo_pruebas.md`](protocolo_pruebas.md) |
-| Resultados cuantitativos | `testing/resultados.md` (verificar que esté subido) |
+| Resultados cuantitativos | `testing.md` |
 | Presentación | `Estación ecológica.pptx` |
 | Fuentes e inteligencia artificial | [`FUENTES.md`](FUENTES.md) |
 
