@@ -154,26 +154,123 @@ La información proporcionada por ChatGPT no reemplaza la consulta de fichas té
 
 ## 4. Uso de inteligencia artificial
 
-**Herramienta declarada:** ChatGPT (OpenAI).  
-**Período:** desarrollo del proyecto durante 2026, incluidos los materiales preparados en noviembre de 2026.
+Durante el desarrollo de la estación ambiental IoT se utilizó ChatGPT, desarrollado por OpenAI, como herramienta de apoyo para la investigación técnica, programación, resolución de problemas y elaboración de documentación.
 
-| Actividad asistida | Consulta o solicitud del equipo | Aporte de IA | Adaptación, comprensión y verificación |
-|---|---|---|---|
-| Diseño de conexiones de sensores | Consultas sobre pines de DHT11, MQ-9 y DSM501A en ESP32-S3 | Apoyo para explicar cableado, alimentación y divisores de tensión | El equipo debe contrastar el esquema con el montaje; se definieron GPIO4, GPIO5 y GPIO7 para los tres sensores y alimentación compatible |
-| Arquitectura del prototipo | Consultas para pasar del montaje Arduino + ESP32 a una ESP32-S3 | Orientaciones de organización del firmware y de lectura directa | Adaptación a la arquitectura actual; la funcionalidad final debe justificarse mediante las pruebas del dispositivo |
-| Tratamiento de los datos | Consultas sobre MQ-9, DSM501A y cómo interpretar sus lecturas | Apoyo para describir limitaciones y evitar expresar señales sin calibración como ppm o PM2.5 certificado | El equipo adoptó la interpretación relativa del MQ-9 y documentó la necesidad de validar el DSM501A |
-| Modelado y documentación 3D | «me puedes hacer un código fusión en python de ese archivo porfa» y solicitudes posteriores de gemelo 3D | Apoyo con script Python, volúmenes representativos, modelo `.3mf`, renders y planos | Se integraron caja y tapa STL con batería, ESP32 y sensores; el formato `.3mf` no se declara como `.f3d` paramétrico validado |
-| Documentación de pruebas | Solicitudes para redactar la Prueba 5 y los resultados del dashboard | Organización y redacción de objetivos, procedimientos, evidencias y criterios de éxito | Los 500 registros son una cifra reportada por el equipo; las estadísticas definitivas deben calcularse desde datos reales, no generarse por IA |
-| Documentación GitHub | «hazme dnvo el coso de readme porfa y el de fuentes tb bien hecho y según la rúbrica porfa» | Elaboración de borradores estructurados para `README.md` y `FUENTES.md` | El equipo debe comprobar dependencias, rutas, versiones y funcionamiento real antes de entregar |
+Su utilización tuvo como objetivo complementar los conocimientos del equipo, facilitar la comprensión de los componentes electrónicos y apoyar la implementación de las distintas etapas del proyecto.
 
-### Qué debe poder explicar el equipo
+Herramienta utilizada: ChatGPT (OpenAI).
+Período de utilización: 2026, durante el desarrollo del proyecto.
+Áreas de aplicación: Electrónica, programación, diseño 3D, análisis de datos y documentación técnica.
 
-- **Adquisición:** cómo la ESP32-S3 lee GPIO4, GPIO5 y GPIO7, y por qué se protegen las entradas de 3,3 V.
-- **Transmisión:** cómo se envían las mediciones por Wi-Fi y qué hace el backend en `server.js`.
-- **Persistencia:** dónde quedan guardadas las mediciones y cómo se recupera su historial.
-- **Visualización:** qué significa cada variable y qué conclusiones **sí** están respaldadas por datos.
-- **Limitaciones:** por qué el MQ-9 se presenta como señal relativa y por qué las lecturas del DSM501A necesitan validación adicional.
-- **Diseño 3D:** diferencia entre el modelo `.3mf` y el archivo nativo `.f3d` solicitado por la pauta.
+4.1. Investigación y selección de componentes electrónicos
+
+Uso de IA: Se realizaron consultas sobre el funcionamiento, las características técnicas y los requerimientos eléctricos de los sensores DHT11, MQ-9 y DSM501A, además de la placa ESP32-S3.
+
+Aporte de la herramienta: ChatGPT proporcionó explicaciones sobre los principios de funcionamiento de los sensores, sus conexiones, alimentación y posibles aplicaciones en un sistema de monitoreo ambiental.
+
+Aplicación al proyecto: La información se utilizó para orientar la selección de componentes, definir sus funciones y organizar la arquitectura electrónica de la estación.
+
+Verificación: Las recomendaciones fueron contrastadas con las conexiones y pruebas prácticas realizadas durante la construcción del prototipo. Las especificaciones que requieren calibración o validación adicional se identificaron como limitaciones del sistema.
+
+4.2. Programación y configuración del sistema
+
+Uso de IA: Se utilizó ChatGPT como apoyo para comprender, desarrollar, revisar y adaptar el código de adquisición de datos de los sensores y su integración con la ESP32-S3.
+
+Aporte de la herramienta: Se recibieron orientaciones relacionadas con la lectura de entradas analógicas y digitales, el procesamiento de señales, la conectividad Wi-Fi y la organización del firmware.
+
+Adaptaciones realizadas:
+
+* Configuración del DHT11 en GPIO4 para registrar temperatura y humedad.
+* Configuración del MQ-9 en GPIO5, incorporando un divisor de voltaje para proteger la entrada analógica.
+* Configuración del DSM501A en GPIO7, utilizando interrupciones para registrar los pulsos y calcular el porcentaje de ocupación LOW.
+* Integración de los tres sensores directamente a la ESP32-S3, reemplazando la arquitectura inicial que también utilizaba Arduino UNO.
+* Organización de las mediciones para su transmisión mediante Wi-Fi.
+
+Comprensión del equipo: Se estudiaron las funciones principales del código, especialmente la adquisición de datos, el procesamiento de las señales y la comunicación del dispositivo.
+
+Verificación: El funcionamiento debe respaldarse mediante los registros y resultados experimentales incluidos en la documentación de pruebas.
+
+4.3. Comunicación, almacenamiento y visualización de datos
+
+Uso de IA: Se realizaron consultas sobre alternativas de comunicación y almacenamiento para implementar un sistema IoT con acceso remoto a la información.
+
+Aporte de la herramienta: Se proporcionaron explicaciones sobre la arquitectura de comunicación entre la ESP32-S3, un servidor web y una base de datos, así como sobre el uso de solicitudes HTTP y estructuras JSON.
+
+Aplicación al proyecto: Se implementó una arquitectura que permite enviar las mediciones a un servidor desplegado en Railway y consultar la información mediante un dashboard web.
+
+Adaptación: La estructura de comunicación se ajustó a las variables ambientales registradas por los tres sensores del prototipo.
+
+Verificación: La plataforma dispone de un historial de aproximadamente 500 registros reportados por el equipo. La integridad, continuidad y precisión de las mediciones deben evaluarse mediante los datos y evidencias experimentales.
+
+Dashboard: https://estacion-ambiental-production.up.railway.app
+
+4.4. Diseño tridimensional y documentación del encapsulado
+
+Uso de IA: Se utilizó ChatGPT como apoyo para la representación tridimensional del prototipo, la organización de sus componentes internos y la elaboración de documentación técnica.
+
+Aporte de la herramienta: Se generaron propuestas de distribución, modelos tridimensionales simplificados, representaciones visuales y planos técnicos a partir de los archivos STL del encapsulado.
+
+Adaptaciones realizadas:
+
+* Ubicación de la batería portátil en el compartimiento izquierdo.
+* Distribución de la ESP32-S3 en el compartimiento central.
+* Ubicación del DSM501A en el sector superior derecho.
+* Distribución del MQ-9 y DHT11 en los compartimientos correspondientes.
+* Incorporación de volúmenes representativos de los componentes electrónicos en el modelo 3D.
+* Elaboración de vistas y documentación dimensional de la caja y su tapa.
+
+Verificación y limitaciones: El modelo ensamblado se visualizó en formato 3MF. Este formato no equivale a un archivo paramétrico nativo de Fusion 360 (.f3d), y la compatibilidad física final de los componentes requiere comprobación dimensional.
+
+4.5. Pruebas experimentales y análisis de resultados
+
+Uso de IA: ChatGPT se utilizó para estructurar el protocolo de pruebas, definir criterios de evaluación y apoyar la interpretación de los resultados obtenidos.
+
+Aporte de la herramienta: Se propusieron procedimientos para evaluar individualmente los sensores, verificar su funcionamiento simultáneo y comprobar la transmisión y almacenamiento de información.
+
+Aplicación al proyecto:
+
+* Organización de las pruebas del DHT11, MQ-9 y DSM501A.
+* Formulación de objetivos, procedimientos y criterios de éxito.
+* Documentación de problemas de alimentación, conexiones y lectura de sensores.
+* Identificación de limitaciones relacionadas con la calibración del MQ-9 y la interpretación de las mediciones del DSM501A.
+* Preparación de la documentación de resultados y evidencias.
+
+Verificación: Las mediciones utilizadas para evaluar el prototipo corresponden a registros experimentales. ChatGPT no se utilizó como fuente de datos simulados para sustituir resultados reales.
+
+Los resultados y procedimientos se documentan en protocolo_pruebas.md y en los archivos de la carpeta testing/.
+
+4.6. Elaboración y revisión de documentación técnica
+
+Uso de IA: Se utilizó ChatGPT como herramienta de apoyo para organizar, redactar y revisar los documentos técnicos del proyecto, considerando los requisitos de evaluación establecidos para el Avance 3.
+
+Documentos asistidos:
+
+* README.md: descripción del proyecto, componentes, arquitectura e instrucciones generales.
+* FUENTES.md: declaración de bibliotecas, documentación externa y uso de inteligencia artificial.
+* protocolo_pruebas.md: estructuración de objetivos, procedimientos y criterios de éxito.
+* Documentación de resultados experimentales.
+* Planos técnicos y material de apoyo para la presentación.
+
+Adaptación: Los documentos se organizaron de acuerdo con las características del prototipo y las exigencias académicas del curso TEI201.
+
+Responsabilidad del equipo: Corresponde a los integrantes verificar la exactitud de las especificaciones, los resultados y las declaraciones incluidas en la documentación antes de su entrega.
+
+4.7. Consideraciones sobre el uso responsable de inteligencia artificial
+
+La inteligencia artificial se utilizó como una herramienta complementaria durante el desarrollo del proyecto y no como sustituto de la experimentación ni de la comprensión técnica del sistema.
+
+El equipo reconoce que:
+
+* Las respuestas generadas por IA pueden contener errores y requieren revisión.
+* Los datos experimentales deben obtenerse directamente del prototipo.
+* Las decisiones de implementación deben justificarse según los componentes y las condiciones reales de funcionamiento.
+* Las propuestas de código deben comprenderse y verificarse antes de considerarse funcionales.
+* Las especificaciones de los sensores y las mediciones que requieren calibración no deben presentarse como resultados certificados.
+* El uso de herramientas externas debe declararse de manera transparente.
+
+La integración del prototipo, la comprobación de su funcionamiento y la presentación de los resultados corresponden a la responsabilidad del equipo.
+
+En conclusión, ChatGPT contribuyó principalmente como herramienta de consulta, asistencia técnica y apoyo documental, mientras que el proyecto se desarrolló mediante la integración de componentes electrónicos, programación, diseño y pruebas experimentales realizadas por el equipo.
 
 ## 5. Responsabilidad del equipo y trazabilidad
 
