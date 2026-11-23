@@ -124,7 +124,7 @@ Las implementaciones se ajustaron a las características de la estación ambient
 
 La asistencia de ChatGPT utilizada en el desarrollo y documentación se declara en la sección 4 de este archivo.
 
-Trazabilidad del código: La guía del curso y las bibliotecas utilizadas se identifican como recursos de apoyo. Para cualquier fragmento copiado o adaptado literalmente desde una fuente externa, corresponde registrar su procedencia exacta y los cambios realizados. La descripción anterior no implica que todas las funciones hayan sido escritas originalmente por el equipo ni que todas provengan de una misma fuente.
+Trazabilidad del código: La guía del curso y las bibliotecas utilizadas se identifican como recursos de apoyo. Para cualquier fragmento copiado o adaptado literalmente desde una fuente externa, corresponde registrar su procedencia exacta y los cambios realizados.
 
 ### 3.7. Información técnica de los sensores
 
@@ -262,8 +262,8 @@ En conclusión, ChatGPT contribuyó principalmente como herramienta de consulta,
 
 ## 5. Responsabilidad del equipo y trazabilidad
 
-Las herramientas de IA se emplearon como apoyo para aprender, revisar, proponer código y preparar documentación. **La integración, ejecución, verificación experimental y presentación de resultados son responsabilidad del equipo.** Ninguna respuesta de IA sustituye las lecturas reales, el análisis de errores ni la validación física.
+La evidencia experimental se encuentra documentada en el protocolo de pruebas y en los archivos de la carpeta testing/.
 
-La evidencia experimental se documenta en [`protocolo_pruebas.md`](protocolo_pruebas.md), en los resultados de testing que se suban y en el dashboard: https://estacion-ambiental-production.up.railway.app.
+El informe testing/informe.md presenta el análisis cuantitativo de 50 registros reales obtenidos del sistema, incluyendo promedios, valores mínimos y máximos, así como la identificación de posibles anomalías en los sensores MQ-9 y DSM501A.
 
-**Revisión obligatoria antes de la entrega:** comprobar librerías y versiones efectivamente instaladas; identificar todo código externo adaptado; añadir las URL precisas de datasheets utilizados; contrastar las declaraciones anteriores con el código final publicado.
+El sistema también dispone de un dashboard web desplegado en Railway, donde se pueden consultar los registros ambientales almacenados.
