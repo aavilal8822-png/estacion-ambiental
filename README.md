@@ -10,9 +10,9 @@ El sistema utiliza un ESP32 para recopilar datos de distintos sensores y enviarl
 
 ## Integrantes
 
-- Anto
-- Agustín
-- Claudio
+- Antonia Ávila
+- Agustín Jiménez
+- Claudio Parada
 
 ## Variables medidas
 
