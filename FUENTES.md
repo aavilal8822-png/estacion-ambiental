@@ -8,8 +8,6 @@
 
 Este documento declara las fuentes externas, bibliotecas, herramientas y asistencia de inteligencia artificial empleadas para desarrollar y documentar la estación ambiental. Su objetivo es distinguir los recursos consultados, las adaptaciones realizadas y el trabajo de integración y comprobación del equipo.
 
-**Nota de verificación:** la lista definitiva de paquetes, versiones y fragmentos de código debe cotejarse con el archivo `.ino` de `firmware/`, `package.json`, `package-lock.json` y `server.js`. No se atribuyen versiones o fragmentos específicos sin comprobarlos en esos archivos.
-
 ## 2. Librerías y dependencias
 
 ## 2.1. Firmware de ESP32-S3
@@ -35,7 +33,6 @@ El firmware firmware/main.ino fue configurado específicamente para utilizar los
 
 Limitación de seguridad identificada: el código utiliza setInsecure() para las conexiones HTTPS de prueba, por lo que no verifica el certificado del servidor. Para una versión destinada a operar permanentemente se debe implementar la validación del certificado TLS.
 
-Nota de versiones: las versiones exactas del core ESP32, ArduinoJson y la biblioteca DHT deben comprobarse en el entorno Arduino IDE utilizado para compilar el proyecto.
 
 ## 2.2. Backend Node.js
 
