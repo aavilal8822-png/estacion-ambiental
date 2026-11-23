@@ -35,10 +35,7 @@ El sistema utiliza un ESP32 para recopilar datos de distintos sensores y enviarl
 
 ## Funcionamiento
 
-Los sensores recopilan información ambiental y el ESP32 procesa las mediciones.
-
-Posteriormente, los datos son enviados mediante Wi-Fi a ThingSpeak, donde pueden almacenarse y visualizarse mediante gráficos.
-
+Los sensores recopilan información ambiental y el ESP32 procesa las mediciones, los cuales son mandados a nuestra pagina.
 
 ## Estructura del repositorio
 
