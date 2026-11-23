@@ -14,14 +14,14 @@ Este documento declara las fuentes externas, bibliotecas, herramientas y asisten
 
 ## 2.1. Firmware de ESP32-S3
 
-Librería	Versión	Uso en el proyecto	Fuente
-Arduino core para ESP32	Por verificar	Programación de la ESP32-S3, lectura ADC, GPIO e interrupciones	Espressif
-WiFi.h	Incluida en el core ESP32	Conexión a internet y reconexión automática	Espressif
-WiFiClientSecure.h	Incluida en el core ESP32	Establecimiento de conexiones HTTPS con el servidor	Espressif
-HTTPClient.h	Incluida en el core ESP32	Envío de mediciones al servidor de Railway mediante solicitudes POST	Espressif
-ArduinoJson.h	Por verificar	Creación y serialización de datos JSON para enviarlos al servidor	ArduinoJson
-DHT.h	Por verificar	Lectura de temperatura y humedad del DHT11	Adafruit DHT Sensor Library
-
+| Librería | Versión | Uso en el proyecto | Fuente |
+|---|---|---|---|
+| Arduino core para ESP32 | Por verificar | Programación de la ESP32-S3, lectura ADC, GPIO e interrupciones | [Espressif](https://github.com/espressif/arduino-esp32) |
+| WiFi.h | Incluida en el core ESP32 | Conexión a internet y reconexión automática | [Espressif](https://github.com/espressif/arduino-esp32) |
+| WiFiClientSecure.h | Incluida en el core ESP32 | Establecimiento de conexiones HTTPS con el servidor | [Espressif](https://github.com/espressif/arduino-esp32) |
+| HTTPClient.h | Incluida en el core ESP32 | Envío de mediciones al servidor de Railway mediante solicitudes POST | [Espressif](https://github.com/espressif/arduino-esp32) |
+| ArduinoJson.h | Por verificar | Creación y serialización de datos JSON para enviarlos al servidor | [ArduinoJson](https://arduinojson.org/) |
+| DHT.h | Por verificar | Lectura de temperatura y humedad del DHT11 | [Adafruit DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library) |
 Adaptaciones e implementación en el proyecto:
 
 El firmware firmware/main.ino fue configurado específicamente para utilizar los tres sensores conectados directamente a la ESP32-S3.
@@ -41,11 +41,13 @@ Nota de versiones: las versiones exactas del core ESP32, ArduinoJson y la biblio
 
 Las dependencias del servidor fueron verificadas mediante los archivos package.json y package-lock.json del repositorio.
 
-Librería	Versión verificada	Uso en el proyecto	Fuente oficial
-dotenv	16.6.1	Carga de variables de entorno para configurar el servidor y las credenciales de conexión.	dotenv
-express	4.22.3	Implementación del servidor HTTP, los endpoints de la API y el acceso al dashboard.	Express
-pg	8.23.1	Comunicación entre el servidor Node.js y la base de datos PostgreSQL.	node-postgres
-Node.js	>=18 (requisito declarado)	Entorno de ejecución del servidor desplegado en Railway.	Node.js
+
+| Librería | Versión verificada | Uso en el proyecto | Fuente oficial |
+|---|---|---|---|
+| dotenv | 16.6.1 | Carga de variables de entorno y credenciales. | [dotenv](https://www.npmjs.com/package/dotenv) |
+| express | 4.22.3 | Servidor HTTP, API y acceso al dashboard. | [Express](https://expressjs.com/) |
+| pg | 8.23.1 | Conexión del servidor con PostgreSQL. | [node-postgres](https://node-postgres.com/) |
+| Node.js | >=18 (requisito) | Entorno de ejecución del servidor. | [Node.js](https://nodejs.org/) |
 
 Adaptación al proyecto:
 
@@ -56,7 +58,6 @@ Verificación de versiones:
 Las versiones de dotenv, express y pg corresponden a las registradas en package-lock.json. Este archivo permite mantener versiones reproducibles de las dependencias del servidor.
 
 El proyecto declara Node.js 18 o superior como requisito de ejecución, pero el archivo no permite identificar la versión exacta utilizada en Railway.
-
 
 ## 3. Material externo, ejemplos y documentación técnica
 
