@@ -49,30 +49,12 @@ Adaptación al proyecto: Estas dependencias forman parte del servidor desarrolla
 
 Las versiones declaradas corresponden al archivo package.json. Las versiones instaladas deben verificarse en package-lock.json.
 
-Design Engineering Center (DEC) — Universidad Adolfo Ibáñez
-
-* Fuente institucional: https://dec.uai.cl
-* Uso en el proyecto: El equipo acudió al DEC de la Universidad Adolfo Ibáñez para solicitar y obtener los componentes electrónicos necesarios para construir la estación ambiental.
-* Consulta técnica: La información sobre las características, funcionamiento, alimentación, conexiones y aplicaciones de los sensores DHT11, MQ-9 y DSM501A fue consultada mediante ChatGPT (OpenAI).
-* Aplicación: Con esta información, el equipo seleccionó e integró los sensores a la ESP32-S3, considerando sus funciones dentro del sistema y los requerimientos de alimentación y conexión.
-* Verificación: Las recomendaciones obtenidas mediante IA se contrastaron con las pruebas y el montaje físico realizados por el equipo, en la medida documentada en el protocolo de pruebas.
-### Código externo incorporado
-
-No es posible determinar únicamente desde los documentos de entrega qué bloques de `server.js` o del firmware fueron copiados o adaptados de ejemplos externos. **El equipo debe revisar el código y agregar aquí cada fragmento externo realmente empleado**, siguiendo este formato:
-
-- **Archivo y función:** `[archivo y nombre de función o líneas]`
-- **Fuente original:** `[URL del tutorial, repositorio o guía]`
-- **Qué se reutilizó:** `[explicación concreta]`
-- **Qué se modificó:** `[pines, campos, tiempos de espera, validación, etc.]`
-- **Cómo se probó:** `[evidencia o prueba realizada]`
-
-Si un bloque se desarrolló íntegramente por el equipo sin copiar un ejemplo externo, indicarlo expresamente tras verificarlo; no inventar referencias.
 
 ## 3. Material externo, ejemplos y documentación técnica
 
 Durante el desarrollo de la estación ambiental IoT se utilizaron recursos institucionales, documentación técnica, material académico y herramientas de inteligencia artificial para apoyar la selección de componentes, el diseño electrónico y la programación del sistema.
 
-3.1. Design Engineering Center (DEC) — Universidad Adolfo Ibáñez
+### 3.1. Design Engineering Center (DEC) — Universidad Adolfo Ibáñez
 
 * Fuente institucional: https://dec.uai.cl
 * Uso en el proyecto: El equipo acudió al DEC de la Universidad Adolfo Ibáñez para solicitar y obtener los componentes electrónicos necesarios para construir la estación ambiental.
@@ -80,21 +62,21 @@ Durante el desarrollo de la estación ambiental IoT se utilizaron recursos insti
 * Aplicación: A partir de estas consultas, el equipo seleccionó e integró los sensores a la ESP32-S3, considerando sus funciones, requerimientos eléctricos y compatibilidad con el sistema.
 * Verificación: Las recomendaciones se contrastaron con el montaje físico y las pruebas realizadas, según lo documentado en el protocolo de pruebas.
 
-3.2. Documentación de ESP32-S3 y Arduino-ESP32
+### 3.2. Documentación de ESP32-S3 y Arduino-ESP32
 
 * Fuente: https://docs.espressif.com/projects/arduino-esp32/en/latest/
 * Uso en el proyecto: Referencia técnica para la programación de la ESP32-S3, sus entradas y salidas, la lectura analógica y la conectividad Wi-Fi.
 * Aplicación: Configuración del DHT11 en GPIO4, MQ-9 en GPIO5 y DSM501A en GPIO7, junto con la lectura de sensores y transmisión de información.
 * Adaptación: El firmware fue organizado para utilizar directamente los tres sensores en una sola ESP32-S3, eliminando la arquitectura anterior que también utilizaba Arduino UNO.
 
-3.3. Guía académica de TEI201 — Taller de Diseño en Ingeniería
+### 3.3. Guía académica de TEI201 — Taller de Diseño en Ingeniería
 
 * Fuente: Material de clases proporcionado por el equipo docente de la Universidad Adolfo Ibáñez.
 * Uso en el proyecto: Orientación para el desarrollo del sistema IoT, incluyendo adquisición de datos, comunicación con servicios web, almacenamiento y visualización.
 * Aplicación: Se tomó como referencia la arquitectura que conecta la ESP32-S3 con un servidor web y una base de datos.
 * Adaptación: La arquitectura se aplicó a los sensores seleccionados y al sistema de monitoreo ambiental desarrollado por el equipo.
 
-3.4. Documentación de Railway
+### 3.4. Documentación de Railway
 
 * Fuente: https://docs.railway.com/
 * Uso en el proyecto: Referencia para el despliegue y configuración de aplicaciones web.
@@ -102,14 +84,14 @@ Durante el desarrollo de la estación ambiental IoT se utilizaron recursos insti
 * Resultado: La plataforma web permite consultar las mediciones ambientales registradas por el sistema.
 * Dashboard: https://estacion-ambiental-production.up.railway.app
 
-3.5. Documentación de GitHub
+### 3.5. Documentación de GitHub
 
 * Fuente: https://docs.github.com/es
 * Uso en el proyecto: Organización, almacenamiento y documentación de los archivos del proyecto.
 * Aplicación: Creación del repositorio con firmware, documentación de hardware, esquemáticos, modelos 3D, pruebas y declaración de fuentes.
 * Repositorio: https://github.com/aavilal8822-png/estacion-ambiental
 
-3.6. Código externo y adaptaciones realizadas
+### 3.6. Código externo y adaptaciones realizadas
 
 Para desarrollar el software se contó con el material académico del curso, documentación de bibliotecas y asistencia de ChatGPT.
 
@@ -138,7 +120,7 @@ La asistencia de ChatGPT utilizada en el desarrollo y documentación se declara 
 
 Trazabilidad del código: La guía del curso y las bibliotecas utilizadas se identifican como recursos de apoyo. Para cualquier fragmento copiado o adaptado literalmente desde una fuente externa, corresponde registrar su procedencia exacta y los cambios realizados. La descripción anterior no implica que todas las funciones hayan sido escritas originalmente por el equipo ni que todas provengan de una misma fuente.
 
-3.7. Información técnica de los sensores
+### 3.7. Información técnica de los sensores
 
 Las características generales de los sensores fueron investigadas con apoyo de ChatGPT (OpenAI).
 
@@ -162,7 +144,7 @@ Herramienta utilizada: ChatGPT (OpenAI).
 Período de utilización: 2026, durante el desarrollo del proyecto.
 Áreas de aplicación: Electrónica, programación, diseño 3D, análisis de datos y documentación técnica.
 
-4.1. Investigación y selección de componentes electrónicos
+### 4.1. Investigación y selección de componentes electrónicos
 
 Uso de IA: Se realizaron consultas sobre el funcionamiento, las características técnicas y los requerimientos eléctricos de los sensores DHT11, MQ-9 y DSM501A, además de la placa ESP32-S3.
 
@@ -172,7 +154,7 @@ Aplicación al proyecto: La información se utilizó para orientar la selección
 
 Verificación: Las recomendaciones fueron contrastadas con las conexiones y pruebas prácticas realizadas durante la construcción del prototipo. Las especificaciones que requieren calibración o validación adicional se identificaron como limitaciones del sistema.
 
-4.2. Programación y configuración del sistema
+### 4.2. Programación y configuración del sistema
 
 Uso de IA: Se utilizó ChatGPT como apoyo para comprender, desarrollar, revisar y adaptar el código de adquisición de datos de los sensores y su integración con la ESP32-S3.
 
@@ -190,7 +172,7 @@ Comprensión del equipo: Se estudiaron las funciones principales del código, es
 
 Verificación: El funcionamiento debe respaldarse mediante los registros y resultados experimentales incluidos en la documentación de pruebas.
 
-4.3. Comunicación, almacenamiento y visualización de datos
+### 4.3. Comunicación, almacenamiento y visualización de datos
 
 Uso de IA: Se realizaron consultas sobre alternativas de comunicación y almacenamiento para implementar un sistema IoT con acceso remoto a la información.
 
@@ -204,7 +186,7 @@ Verificación: La plataforma dispone de un historial de aproximadamente 500 regi
 
 Dashboard: https://estacion-ambiental-production.up.railway.app
 
-4.4. Diseño tridimensional y documentación del encapsulado
+### 4.4. Diseño tridimensional y documentación del encapsulado
 
 Uso de IA: Se utilizó ChatGPT como apoyo para la representación tridimensional del prototipo, la organización de sus componentes internos y la elaboración de documentación técnica.
 
@@ -221,7 +203,7 @@ Adaptaciones realizadas:
 
 Verificación y limitaciones: El modelo ensamblado se visualizó en formato 3MF. Este formato no equivale a un archivo paramétrico nativo de Fusion 360 (.f3d), y la compatibilidad física final de los componentes requiere comprobación dimensional.
 
-4.5. Pruebas experimentales y análisis de resultados
+### 4.5. Pruebas experimentales y análisis de resultados
 
 Uso de IA: ChatGPT se utilizó para estructurar el protocolo de pruebas, definir criterios de evaluación y apoyar la interpretación de los resultados obtenidos.
 
@@ -239,7 +221,7 @@ Verificación: Las mediciones utilizadas para evaluar el prototipo corresponden 
 
 Los resultados y procedimientos se documentan en protocolo_pruebas.md y en los archivos de la carpeta testing/.
 
-4.6. Elaboración y revisión de documentación técnica
+### 4.6. Elaboración y revisión de documentación técnica
 
 Uso de IA: Se utilizó ChatGPT como herramienta de apoyo para organizar, redactar y revisar los documentos técnicos del proyecto, considerando los requisitos de evaluación establecidos para el Avance 3.
 
@@ -255,7 +237,7 @@ Adaptación: Los documentos se organizaron de acuerdo con las características d
 
 Responsabilidad del equipo: Corresponde a los integrantes verificar la exactitud de las especificaciones, los resultados y las declaraciones incluidas en la documentación antes de su entrega.
 
-4.7. Consideraciones sobre el uso responsable de inteligencia artificial
+### 4.7. Consideraciones sobre el uso responsable de inteligencia artificial
 
 La inteligencia artificial se utilizó como una herramienta complementaria durante el desarrollo del proyecto y no como sustituto de la experimentación ni de la comprensión técnica del sistema.
 
