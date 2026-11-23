@@ -44,6 +44,5 @@
 
 - Los valores corresponden a precios referenciales de proveedores chilenos y pueden variar.
 - Los costos no incluyen despacho.
-- *El costo de impresión 3D es una estimación basada en 300 g de PLA a $85/g y 10 horas de impresión a $1.000/h. Debe reemplazarse por el costo real cuando esté disponible.
 - El presupuesto representa el costo estimado de replicar una unidad del prototipo.
 - Se considera un divisor de voltaje para cada uno de los sensores MQ-9 y DSM501A.
