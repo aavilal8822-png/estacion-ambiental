@@ -5,10 +5,11 @@ const path = require("path");
 const { Pool } = require("pg");
 
 const app = express();
+
 app.use(express.json({ limit: "16kb" }));
 app.use(express.static(path.join(__dirname, "public")));
 
-// Configuracion de PostgreSQL desde variables de entorno.
+// Conexion a PostgreSQL.
 const pool = new Pool({
   connectionString: (process.env.DATABASE_URL || "").split("?")[0],
   ssl: process.env.DB_CA_CERT
@@ -22,7 +23,7 @@ pool.on("error", () => {
   console.error("Error en una conexion inactiva de PostgreSQL");
 });
 
-// Crea la tabla sin borrar las lecturas existentes.
+// Prepara la tabla sin borrar datos existentes.
 async function crearTabla() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS lecturas (
@@ -37,33 +38,49 @@ async function crearTabla() {
   console.log("Tabla 'lecturas' lista");
 }
 
-// Solo permite guardar datos con la clave configurada.
+// Comprueba la clave antes de permitir guardar una lectura.
 function revisarClave(req, res, next) {
-  if (!process.env.API_KEY) {
+  const recibida = req.get("x-api-key") || "";
+  const esperada = process.env.API_KEY || "";
+
+  // Diagnostico temporal: no imprime ninguna clave.
+  console.log("DIAGNOSTICO API", {
+    caracteresRecibidos: recibida.length,
+    caracteresEsperados: esperada.length,
+    coinciden: recibida === esperada,
+    coincideSinEspacios: recibida.trim() === esperada.trim()
+  });
+
+  if (!esperada) {
     return res.status(503).json({
       error: "API_KEY no configurada en el servidor"
     });
   }
 
-  if (req.get("x-api-key") !== process.env.API_KEY) {
-    return res.status(401).json({ error: "API key invalida" });
+  if (recibida !== esperada) {
+    return res.status(401).json({
+      error: "API key invalida"
+    });
   }
 
   next();
 }
 
-// Comprueba que el servidor pueda consultar la base.
+// Comprueba la conexion con la base de datos.
 app.get("/api/salud", async (req, res) => {
   try {
     await pool.query("SELECT 1");
     res.json({ ok: true, db: "conectada" });
   } catch (err) {
     console.error("Error de conexion:", err.code || "sin codigo");
-    res.status(500).json({ ok: false, error: "Base no disponible" });
+    res.status(500).json({
+      ok: false,
+      error: "Base no disponible"
+    });
   }
 });
 
-// Guarda una lectura. Cada variable se almacena en una fila.
+// Recibe y guarda una lectura del ESP32.
 app.post("/api/lecturas", revisarClave, async (req, res) => {
   const { dispositivo, sensor, valor } = req.body || {};
 
@@ -78,7 +95,8 @@ app.post("/api/lecturas", revisarClave, async (req, res) => {
     !Number.isFinite(valor)
   ) {
     return res.status(400).json({
-      error: "Dispositivo y sensor deben ser textos de 1 a 50 caracteres; valor debe ser un numero finito"
+      error:
+        "Dispositivo y sensor deben ser textos de 1 a 50 caracteres; valor debe ser un numero finito"
     });
   }
 
@@ -89,14 +107,17 @@ app.post("/api/lecturas", revisarClave, async (req, res) => {
       [dispositivo.trim(), sensor.trim(), valor]
     );
 
-    res.status(201).json({ ok: true, id: resultado.rows[0].id });
+    res.status(201).json({
+      ok: true,
+      id: resultado.rows[0].id
+    });
   } catch (err) {
     console.error("Error al guardar:", err.code || "sin codigo");
     res.status(500).json({ error: "Error al guardar" });
   }
 });
 
-// Devuelve las lecturas mas recientes para el dashboard.
+// Entrega las ultimas lecturas al dashboard.
 app.get("/api/lecturas", async (req, res) => {
   const solicitado = Number(req.query.limite ?? 50);
 
@@ -121,7 +142,7 @@ app.get("/api/lecturas", async (req, res) => {
   }
 });
 
-// Railway proporciona PORT; en local usaremos 3000.
+// Railway proporciona PORT; en local se usa 3000.
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
