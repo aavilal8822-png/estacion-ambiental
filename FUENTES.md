@@ -94,7 +94,7 @@ Antes de iniciar, configurar las variables de entorno requeridas por `server.js`
 
 La carcasa distribuye la **batería a la izquierda**, la **ESP32-S3 al centro**, y los sensores a la derecha: **DSM501A arriba**, **MQ-9 en el alojamiento cuadrado** y **DHT11 en el sector circular**. Se consideran ventilación, paso de cables y acceso para mantenimiento.
 
-En [`diseno-3d/modelo/`](diseno-3d/modelo/) se incluyen los STL de caja y tapa, renders y planos técnicos en PDF. También se desarrolló un ensamble de referencia en formato `.3mf`; **no debe describirse como archivo paramétrico `.f3d` de Fusion 360** a menos que se haya generado y verificado dicho archivo.
+En [`diseno-3d/modelo/`](diseno-3d/modelo/) se incluyen los STL de caja y tapa, renders y planos técnicos en PDF. También se desarrolló un ensamble de referencia en formato `.3mf` y el archivo de fusion en formato .f3d
 
 ## 7. Pruebas y limitaciones
 
