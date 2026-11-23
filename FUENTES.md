@@ -39,15 +39,23 @@ Nota de versiones: las versiones exactas del core ESP32, ArduinoJson y la biblio
 
 ## 2.2. Backend Node.js
 
-Librería	Versión declarada	Uso en el proyecto	Fuente oficial
-dotenv	^16.4.5	Carga de variables de entorno para configurar el servidor y las credenciales de conexión.	dotenv
-express	^4.21.0	Implementación del servidor HTTP, los endpoints de la API y el acceso al dashboard.	Express
-pg	^8.13.0	Comunicación entre el servidor Node.js y la base de datos PostgreSQL.	node-postgres
-Node.js	>=18	Entorno de ejecución del servidor alojado en Railway.	Node.js
+Las dependencias del servidor fueron verificadas mediante los archivos package.json y package-lock.json del repositorio.
 
-Adaptación al proyecto: Estas dependencias forman parte del servidor desarrollado para la estación ambiental. Su función es permitir la configuración del backend, la comunicación mediante HTTP y el acceso a PostgreSQL para gestionar las mediciones ambientales.
+Librería	Versión verificada	Uso en el proyecto	Fuente oficial
+dotenv	16.6.1	Carga de variables de entorno para configurar el servidor y las credenciales de conexión.	dotenv
+express	4.22.3	Implementación del servidor HTTP, los endpoints de la API y el acceso al dashboard.	Express
+pg	8.23.1	Comunicación entre el servidor Node.js y la base de datos PostgreSQL.	node-postgres
+Node.js	>=18 (requisito declarado)	Entorno de ejecución del servidor desplegado en Railway.	Node.js
 
-Las versiones declaradas corresponden al archivo package.json. Las versiones instaladas deben verificarse en package-lock.json.
+Adaptación al proyecto:
+
+Estas dependencias se utilizaron para desarrollar el backend de la estación ambiental IoT, permitiendo recibir las mediciones enviadas por la ESP32-S3, gestionar su almacenamiento en PostgreSQL y poner los datos a disposición del dashboard web.
+
+Verificación de versiones:
+
+Las versiones de dotenv, express y pg corresponden a las registradas en package-lock.json. Este archivo permite mantener versiones reproducibles de las dependencias del servidor.
+
+El proyecto declara Node.js 18 o superior como requisito de ejecución, pero el archivo no permite identificar la versión exacta utilizada en Railway.
 
 
 ## 3. Material externo, ejemplos y documentación técnica
